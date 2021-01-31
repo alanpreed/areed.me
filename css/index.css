@@ -11,27 +11,39 @@
   --green: #266e26;
   --darkgreen: #45844b;
   --green2: #048a81;
+
+  --headerBackground: #048a81;
+  --titleText: #000000;
+  --pageBackground: #e0e0e0;
+  --pageText: #333;
+  --tagBox: #c0c0c0;
+  --tagText: #000000;
+  --tagTextVisited: #082840;
+  --linkText: #082840;
+  --linkTextVisited: #17050f;
 }
+
 * {
   box-sizing: border-box;
 }
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: system-ui, sans-serif;
-  color: var(--darkgray);
-  background-color: var(--lightgrey);
+  color: var(--pageText);
+  background-color: var(--pageBackground);
 }
 p:last-child {
   margin-bottom: 0;
 }
 
 a[href] {
-  color: var(--blue);
+  color: var(--linkText);
 }
 a[href]:visited {
-  color: var(--navy);
+  color: var(--linkTextVisited);
 }
 
 main {
@@ -42,21 +54,9 @@ main :first-child {
 }
 header {
   border-bottom: 1px solid var(--lightgray);
-  background-color: var(--green2);
+  background-color: var(--headerBackground);
   display: flex;
   align-items: center;
-}
-header:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-table {
-  margin: 1em 0;
-}
-table td,
-table th {
-  padding-right: 1em;
 }
 
 pre,
@@ -129,7 +129,7 @@ pre {
   float: left;
   margin: 1rem 0;
   font-size: 1.5em;
-  color: #000000;
+  color: var(--titleText);
 }
 .home :link:not(:hover) {
   text-decoration: none;
@@ -184,14 +184,16 @@ pre {
   font-size: 0.625em; /* 10px /16 */
   padding: 2px 4px;
   margin-left: 0.8em; /* 8px /10 */
-  background-color: var(--grey);
-  color: var(--black);
+  background-color: var(--tagBox);
+  color: var(--tagText);
   border-radius: 0.25em; /* 3px /12 */
   text-decoration: none;
 }
-a[href].post-tag,
+a[href].post-tag {
+  color: var(--tagText);
+}
 a[href].post-tag:visited {
-  color: var(--darkred);
+  color: var(--tagTextVisited);
 }
 
 .list-tag {
@@ -201,14 +203,16 @@ a[href].post-tag:visited {
   /* font-size: 0.625em; 10px /16 */
   padding: 2px 4px;
   margin-left: 0.8em; /* 8px /10 */
-  background-color: var(--grey);
-  color: var(--black);
+  background-color: var(--tagBox);
+  color: var(--tagText);
   border-radius: 0.25em; /* 3px /12 */
   text-decoration: none;
 }
-a[href].post-tag,
-a[href].post-tag:visited {
-  color: var(--darkred);
+a[href].list-tag {
+  color: var(--tagText);
+}
+a[href].list-tag:visited {
+  color: var(--tagTextVisited);
 }
 
 /* Warning */

@@ -72,7 +72,7 @@ module.exports = function (eleventyConfig) {
         });
       }
     }
-    console.log(tagMap);
+    // console.log(tagMap);
     return tagMap;
   });
 
