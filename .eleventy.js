@@ -81,5 +81,6 @@ module.exports = function (eleventyConfig) {
       input: "pages",
       output: "docs",
     },
+    pathPrefix: "blog",
   };
 };

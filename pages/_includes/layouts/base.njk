@@ -13,7 +13,7 @@
     <h1 class=home> My blog </h1>
 
     <ul class="nav">
-      {%- for entry in collections.all | eleventyNavigation %}
+      {%- for entry in collections.all | eleventyNavigation | reverse %}
         <li class="nav-item{% if entry.url == page.url %} nav-item-active{% endif %}"> <a href="{{ entry.url | url }}">{{ entry.title }}</a></li>
       {%- endfor %}
     </ul>
