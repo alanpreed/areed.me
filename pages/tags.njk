@@ -1,0 +1,35 @@
+---
+pagination:
+  data: collections.doublePagination
+  size: 1
+  alias: tag
+layout: layouts/base.njk
+eleventyComputed:
+title: Tagged “{{ tag }}”
+permalink: /tags/{{ tag.tagName }}/{% if tag.pageNumber > 1 %}{{ tag.pageNumber }}/{% endif %}
+---
+
+<h2>Posts tagged “{{ tag.tagName  }}”</h2>
+
+{% set list_of_posts = tag.pageData %}
+
+{% include "post_list.njk" %}
+
+{# First page has no number in the URL, making navigation buttons slightly convoluted #}
+<p>
+    {% if tag.pageNumber > 1 %}
+      {% if tag.pageNumber == 2 %}
+        <a href="/tags/{{ tag.tagName }}/">Previous</a>
+      {% else %}
+        <a href="/tags/{{ tag.tagName }}/{{ tag.pageNumber - 1}}">Previous</a>
+      {% endif %} 
+    {% else %}
+      Previous
+    {% endif %}
+    / 
+    {% if tag.pageNumber < tag.totalPages %}
+      <a href="/tags/{{ tag.tagName }}/{{ tag.pageNumber + 1}}">Next</a>
+    {% else %}
+    Next
+    {% endif %}
+</p>

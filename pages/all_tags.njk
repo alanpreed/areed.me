@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+title: All post tags
+permalink: /tags/
+eleventyNavigation:
+  key: tags
+---
+
+<h2>
+All post tags:
+</h2>
+{% for tag in collections.allTags %}
+  <div class=post-taglist>
+  {% set tagUrl %}/tags/{{ tag }}/{% endset %}
+    <a href="{{ tagUrl | url }}" class=list-tag> {{ tag }}</a>
+  </div>
+{% endfor %}

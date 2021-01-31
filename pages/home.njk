@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+pagination:
+    data: collections.posts
+    size: 10
+    alias: posts
+    reverse: true
+
+title: Alan's blog
+eleventyNavigation:
+  key: home
+---
+
+<h2>
+{% if pagination.pageNumber == 0 %}
+  Latest posts:
+{% else %}
+  Page {{ pagination.pageNumber + 1 }}
+{% endif %} 
+</h2>
+
+{{ content | safe }}
+
+{% set list_of_posts = posts %}
+{% include "post_list.njk" %}
+
+<p>
+    {% if pagination.href.previous %}
+      <a href="{{ pagination.href.previous }}">Previous</a>
+    {% else %}
+    Previous
+    {% endif %} / 
+    {% if pagination.href.next %}
+      <a href="{{ pagination.href.next }}">Next</a>
+    {% else %}
+    Next
+    {% endif %}
+</p>

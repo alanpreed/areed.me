@@ -1,0 +1,25 @@
+{# Generates a formatted list of entries for each post in list_of_posts #}
+
+{% for post in list_of_posts | reverse %}
+  <div class="postlist-item">
+    <div class="postlist-item-title">
+      <h2>
+        <a href="{{ post.url }}">{{ post.data.title }}</a>
+      </h2>
+      <h5>
+        {{post.date | readableDate}}
+      </h5>
+    </div>
+    <div>
+      {{ post.data.summary }}
+    </div>
+
+    <div class="post-taglist">
+     
+    {% for tag in post.data.tags | removePostsTag %}
+      {% set tagUrl %}/tags/{{ tag }}/{% endset %}
+      <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
+    {% endfor %}
+    </div>
+  </div>
+{% endfor %}
