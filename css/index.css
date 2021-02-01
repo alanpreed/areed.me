@@ -156,6 +156,14 @@ pre {
 }
 
 /* Posts list */
+@media (max-width: 50em) {
+.postlist-item {
+  margin-bottom: 5em;
+  
+  justify-items: center;
+}
+}
+
 .postlist-item {
   margin-bottom: 5em;
   width: 40em;
