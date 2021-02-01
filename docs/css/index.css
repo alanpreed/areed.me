@@ -11,6 +11,7 @@
   --green: #266e26;
   --darkgreen: #45844b;
   --green2: #048a81;
+  --yellow: #fbff00;
 
   --headerBackground: #048a81;
   --titleText: #000000;
@@ -21,6 +22,8 @@
   --tagTextVisited: #082840;
   --linkText: #082840;
   --linkTextVisited: #17050f;
+
+
 }
 
 * {
@@ -159,17 +162,24 @@ pre {
 @media (max-width: 40em) {
 .postlist-item {
   margin-bottom: 5em;
-  color: var(--white);
   justify-items: center;
 }
 }
+/* Cap size on large screens */
+@media (min-width: 40em) {
+  .postlist-item {
+    margin-bottom: 5em;
+    width: 40em;
+    justify-items: center;
+  }
+  }
 
-.postlist-item {
+/* .postlist-item {
   margin-bottom: 5em;
   width: 40em;
   color: var(--red);
   justify-items: center;
-}
+} */
 
 .postlist-item-title {
   display: flex;
