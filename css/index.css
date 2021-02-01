@@ -156,10 +156,10 @@ pre {
 }
 
 /* Posts list */
-@media (max-width: 50em) {
+@media (max-width: 40em) {
 .postlist-item {
   margin-bottom: 5em;
-  
+  color: var(--white);
   justify-items: center;
 }
 }
@@ -167,6 +167,7 @@ pre {
 .postlist-item {
   margin-bottom: 5em;
   width: 40em;
+  color: var(--red);
   justify-items: center;
 }
 
