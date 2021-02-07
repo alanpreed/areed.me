@@ -90,10 +90,20 @@ pre {
   background-color: #f6f6f6;
 }
 
+@media (max-width: 100em) {
 .content {
   padding: 0 5%;
   padding-bottom: 3%;
 }
+}
+
+@media (min-width: 100em) {
+  .content {
+    width: 100em;
+    padding: 0 5%;
+    padding-bottom: 3%;
+  }
+  }
 
 .highlight-line {
   display: block;
