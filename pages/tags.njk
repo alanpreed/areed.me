@@ -5,7 +5,7 @@ pagination:
   alias: tag
 layout: layouts/base.njk
 eleventyComputed:
-title: Tagged “{{ tag }}”
+title: Posts tagged “{{ tag }}”
 permalink: /tags/{{ tag.tagName }}/{% if tag.pageNumber > 1 %}{{ tag.pageNumber }}/{% endif %}
 ---
 
