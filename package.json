@@ -1,5 +1,5 @@
 {
-  "name": "blog",
+  "name": "areed.me",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alanpreed/blog.git"
+    "url": "git+https://github.com/alanpreed/areed.me.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/alanpreed/blog/issues"
+    "url": "https://github.com/alanpreed/areed.me/issues"
   },
-  "homepage": "https://github.com/alanpreed/blog#readme",
+  "homepage": "https://github.com/alanpreed/areed.me#readme",
   "devDependencies": {
     "@11ty/eleventy": "^0.11.1",
     "@11ty/eleventy-navigation": "^0.1.6",
