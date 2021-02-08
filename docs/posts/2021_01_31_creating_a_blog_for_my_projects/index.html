@@ -55,14 +55,14 @@
 <p>The setup used for hosting this site has also deliberately been kept as simple as possible.  The 11ty project that generates the site is on <a href="https://github.com/alanpreed/blog">GitHub</a>, which grants access to free site hosting via GitHub Pages. This can use the root directory, or a subdirectory called <code>docs</code>, of any branch of the repository as the source location for a GitHub Pages website.</p>
 <p>The root directory of this project isn't a suitable GitHub Pages source, as the 11ty template files confuse it, so I've instead configured the repository to use the <code>docs</code> folder for this. 11ty has also been configured to use this directory as its output folder, instead of <code>_site</code>. Although the directory name doesn't make much sense for this usage, the alternative would be to host the site from a separate branch. This would make the process of updating the site content significantly more involved, so I'll live with the slightly strange directory naming instead.</p>
 <figure>
-  <img src=/images/2021_01_31/github_setup.png alt="my alt text"/>
+  <img src=/images/2021_01_31/github_setup.png alt="GitHub pages configuration for the site's repository."/>
   <figcaption>GitHub pages configuration for the site's repository.</figcaption>
 </figure>
 <p>My GitHub Pages configuration can be seen above. By default, when enabled the repository's GitHub Pages site is hosted on a <code>github.io</code> domain. However, as can be seen in the screenshot I've configured my repository to use the custom domain <a href="https://areed.me">areed.me</a> instead. After purchasing the domain name through Google Domains, it was straightforward to set this up as the custom GitHub Pages domain by following the instructions in the GitHub documentation found <a href="https://docs.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site">here</a>.</p>
 <p>Briefly, the process is follows. Firstly, add the custom domain through the GitHub web interface. This creates a CNAME file in the GitHub Pages source folder (<code>docs</code> for this project) containing the custom domain name. Next, configure the domain's DNS settings in the Google Domains web interface. Under &quot;Custom resource records&quot;, add an &quot;A&quot; record to point the root domain (<a href="https://areed.me">areed.me</a> for this project) to GitHub Pages using the four IP addresses found in the documentation. This should be all that's necessary to get the site up and running, though apparently it can sometimes take some time before changes propagate through the system.</p>
 <p>Optionally, you can also add a &quot;CNAME&quot; record to direct the &quot;www.&quot; subdomain (i.e. <a href="https://areed.me">www.areed.me</a> here) to your GitHub Pages homepage too. I've also enabled HTTPS in the GitHub Pages settings as this is recommended. The final configuration for this domain, under the Google Domains DNS settings, can be seen in the screenshot below.</p>
 <figure>
-  <img src=/images/2021_01_31/domain_setup.png alt="my alt text"/>
+  <img src=/images/2021_01_31/domain_setup.png alt="Google Domains DNS configuration for the site's domain."/>
   <figcaption>Google Domains DNS configuration for the site's domain.</figcaption>
 </figure>
 <h3>Conclusion</h3>

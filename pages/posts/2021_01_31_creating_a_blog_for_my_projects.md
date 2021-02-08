@@ -40,7 +40,7 @@ The setup used for hosting this site has also deliberately been kept as simple a
 The root directory of this project isn't a suitable GitHub Pages source, as the 11ty template files confuse it, so I've instead configured the repository to use the `docs` folder for this. 11ty has also been configured to use this directory as its output folder, instead of `_site`. Although the directory name doesn't make much sense for this usage, the alternative would be to host the site from a separate branch. This would make the process of updating the site content significantly more involved, so I'll live with the slightly strange directory naming instead.
 
 <figure>
-  <img src={{ image_path | append: "github_setup.png" }} alt="my alt text"/>
+  <img src={{ image_path | append: "github_setup.png" }} alt="GitHub pages configuration for the site's repository."/>
   <figcaption>GitHub pages configuration for the site's repository.</figcaption>
 </figure>
 
@@ -51,7 +51,7 @@ Briefly, the process is follows. Firstly, add the custom domain through the GitH
 Optionally, you can also add a "CNAME" record to direct the "www." subdomain (i.e. [www.areed.me](https://areed.me) here) to your GitHub Pages homepage too. I've also enabled HTTPS in the GitHub Pages settings as this is recommended. The final configuration for this domain, under the Google Domains DNS settings, can be seen in the screenshot below.  
 
 <figure>
-  <img src={{ image_path | append: "domain_setup.png" }} alt="my alt text"/>
+  <img src={{ image_path | append: "domain_setup.png" }} alt="Google Domains DNS configuration for the site's domain."/>
   <figcaption>Google Domains DNS configuration for the site's domain.</figcaption>
 </figure>
 
