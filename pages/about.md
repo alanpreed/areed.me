@@ -3,6 +3,7 @@ layout: layouts/base.njk
 title: About
 eleventyNavigation:
   key: about
+  order: 3
 ---
 
 ### About this site
