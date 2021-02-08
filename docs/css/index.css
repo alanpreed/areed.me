@@ -90,6 +90,14 @@ pre {
   background-color: #f6f6f6;
 }
 
+img {
+  max-width: 100%;
+}
+
+figure {
+  margin: 5%;
+}
+
 @media (max-width: 100em) {
 .content {
   padding: 0 5%;
@@ -104,6 +112,11 @@ pre {
     padding-bottom: 3%;
   }
   }
+
+.figure{
+  max-width: 50px;
+  width: 50px;
+}
 
 .highlight-line {
   display: block;
