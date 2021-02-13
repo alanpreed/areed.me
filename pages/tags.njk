@@ -5,7 +5,8 @@ pagination:
   alias: tag
 layout: layouts/base.njk
 eleventyComputed:
-title: Posts tagged “{{ tag }}”
+  title: posts tagged “{{ tag.tagName }}”
+  description: All posts categorised with the tag “{{ tag.tagName }}” on areed.me
 permalink: /tags/{{ tag.tagName }}/{% if tag.pageNumber > 1 %}{{ tag.pageNumber }}/{% endif %}
 ---
 

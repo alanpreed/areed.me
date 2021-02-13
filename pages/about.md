@@ -1,6 +1,7 @@
 ---
 layout: layouts/base.njk
-title: About
+title: about
+description: areed.me is the personal website of Alan Reed, created to allow me to document and share projects I've worked on in my spare time.
 eleventyNavigation:
   key: about
   order: 3
