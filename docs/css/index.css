@@ -22,8 +22,6 @@
   --tagTextVisited: #082840;
   --linkText: #082840;
   --linkTextVisited: #17050f;
-
-
 }
 
 * {
@@ -99,10 +97,10 @@ figure {
 }
 
 @media (max-width: 100em) {
-.content {
-  padding: 0 5%;
-  padding-bottom: 3%;
-}
+  .content {
+    padding: 0 5%;
+    padding-bottom: 3%;
+  }
 }
 
 @media (min-width: 100em) {
@@ -111,9 +109,9 @@ figure {
     padding: 0 5%;
     padding-bottom: 3%;
   }
-  }
+}
 
-.figure{
+.figure {
   max-width: 50px;
   width: 50px;
 }
@@ -183,10 +181,10 @@ figure {
 
 /* Posts list */
 @media (max-width: 40em) {
-.postlist-item {
-  margin-bottom: 5em;
-  justify-items: center;
-}
+  .postlist-item {
+    margin-bottom: 5em;
+    justify-items: center;
+  }
 }
 /* Cap size on large screens */
 @media (min-width: 40em) {
@@ -195,14 +193,7 @@ figure {
     width: 40em;
     justify-items: center;
   }
-  }
-
-/* .postlist-item {
-  margin-bottom: 5em;
-  width: 40em;
-  color: var(--red);
-  justify-items: center;
-} */
+}
 
 .postlist-item-title {
   display: flex;
@@ -212,6 +203,23 @@ figure {
 .postlist {
   list-style: none;
   padding: 0;
+}
+
+.post-subtitle {
+  display: flex;
+  padding-top: 0px;
+  margin-top: 0px;
+  justify-content: space-between;
+}
+.post-date {
+  padding-top: 0px;
+  margin-top: 0px;
+  font-style: italic;
+}
+.post-author {
+  padding-top: 0px;
+  margin-top: 0px;
+  font-style: normal;
 }
 
 .post-taglist {

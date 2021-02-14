@@ -1,9 +1,10 @@
 ---
 title: Creating a home for my projects
-layout: layouts/post.njk
+author: Alan Reed
 date: 2021-01-31
-tags: [areed.me, eleventy, web]
 description: "I finally decided to make a website, to keep a record of the various things I've worked on. A brief adventure in static site generation with 11ty."
+tags: [areed.me, eleventy, web]
+layout: layouts/post.njk
 image_path: /images/2021_01_31/
 ---
 

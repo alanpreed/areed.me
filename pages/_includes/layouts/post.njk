@@ -4,4 +4,13 @@ tags: posts
 ---
 
 <h2>{{ title }}</h2>
+
+<div class="post-subtitle">
+  <h4 class="post-author"> {{ author }} </h4>
+  <h5 class="post-date">
+      {{date | readableDate}}
+  </h5>
+</div>
+
+
 {{ content | safe }}

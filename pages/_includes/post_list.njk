@@ -6,8 +6,11 @@
       <h2>
         <a href="{{ post.url | url}}">{{ post.data.title }}</a>
       </h2>
-      <h5>
-        {{post.date | readableDate}}
+    </div>
+    <div class="post-subtitle">
+      <h4 class="post-author"> {{ post.data.author }} </h4>
+      <h5 class="post-date">
+          {{post.date | readableDate}}
       </h5>
     </div>
     <div>
