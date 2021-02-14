@@ -1,0 +1,5 @@
+# areed.me/robots.txt
+Sitemap: https://areed.me/sitemap.xml
+User-agent: *
+Disallow: /404.html
+Disallow: /images/
