@@ -3,6 +3,7 @@ pagination:
   data: collections.doublePagination
   size: 1
   alias: tag
+  addAllPagesToCollections: true
 layout: layouts/base.njk
 eleventyComputed:
   title: posts tagged “{{ tag.tagName }}”

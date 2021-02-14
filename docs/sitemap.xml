@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    
+       
+        <url>
+            <loc>https://areed.me/</loc>
+            <lastmod>29/01/2021</lastmod>
+            <changefreq>monthly</changefreq>
+        </url>
+        
+    
+       
+        <url>
+            <loc>https://areed.me/about/</loc>
+            <lastmod>30/01/2021</lastmod>
+            <changefreq>monthly</changefreq>
+        </url>
+        
+    
+       
+        <url>
+            <loc>https://areed.me/tags/</loc>
+            <lastmod>30/01/2021</lastmod>
+            <changefreq>monthly</changefreq>
+        </url>
+        
+    
+       
+        <url>
+            <loc>https://areed.me/posts/2021_01_31_creating_a_home_for_my_projects/</loc>
+            <lastmod>31/01/2021</lastmod>
+            <changefreq>monthly</changefreq>
+        </url>
+        
+    
+       
+        <url>
+            <loc>https://areed.me/tags/areed.me/</loc>
+            <lastmod>13/02/2021</lastmod>
+            <changefreq>monthly</changefreq>
+        </url>
+        
+    
+       
+        <url>
+            <loc>https://areed.me/tags/eleventy/</loc>
+            <lastmod>13/02/2021</lastmod>
+            <changefreq>monthly</changefreq>
+        </url>
+        
+    
+       
+        <url>
+            <loc>https://areed.me/tags/web/</loc>
+            <lastmod>13/02/2021</lastmod>
+            <changefreq>monthly</changefreq>
+        </url>
+        
+    
+</urlset>
