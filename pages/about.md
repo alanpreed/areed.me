@@ -8,7 +8,7 @@ eleventyNavigation:
   order: 3
 ---
 
-### About this site
+## About this site
 
 I'm Alan, someone who likes to spend his spare time tinkering on projects across a range of disciplines. Over the years I've dabbled in a whole bunch of areas, including: software, electronics, embedded systems, bicycles, car maintenance, woodwork, 3D printing and more.
 
