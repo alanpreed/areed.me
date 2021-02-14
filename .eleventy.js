@@ -7,6 +7,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy("images");
+  eleventyConfig.addPassthroughCopy("CNAME");
 
   // Avoids page tags overwriting layout tags
   eleventyConfig.setDataDeepMerge(true);
