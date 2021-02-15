@@ -28,6 +28,11 @@ module.exports = function (eleventyConfig) {
     }
   });
 
+  // Format post image file string
+  eleventyConfig.addFilter("formatImagePath", (date, fileName) => {
+    return "/images/" + format(date, "yyyy-MM-dd") + "/" + fileName;
+  });
+
   // Create collection of all post tags
   eleventyConfig.addCollection("allTags", (collection) => {
     const tagsSet = new Set();
