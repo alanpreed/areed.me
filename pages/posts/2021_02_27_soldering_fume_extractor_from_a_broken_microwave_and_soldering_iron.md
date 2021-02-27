@@ -2,7 +2,7 @@
 title: "Soldering fume extractor from a broken microwave and soldering iron"
 author: Alan Reed
 date: 2021-02-27
-description: "OpenWindow is a project to create an open-source controller for my car's electric windows. This post originally appeared as a Project14 competition entry, where it won a runner-up prize."
+description: "A small project to build a soldering fume extractor from recycled waste. This post originally appeared as a Project14 competition entry."
 tags: [electronics, hardware, recycling, soldering, project14]
 layout: layouts/post.njk
 ---
@@ -20,12 +20,16 @@ A fume extractor for soldering is something that I've wanted for a long time now
   <figcaption>The fan housing in the back of the microwave.</figcaption>
 </figure>
 
+### Fan speed control
+
 Although not strictly necessary, it would be nice if the extractor fan speed was adjustable so that we could control the rate of air flow and level of noise. Fortunately, my pile of broken electronics was able to provide here too. My trusty old Maplin adjustable soldering iron bit the dust a few months ago when the heating coil went open-circuit. While investigating to see whether it would be repairable, I discovered that the temperature adjustment dial on the base simply varied the output voltage supplied to the iron between roughly 50-210V, like a dimmer switch. I connected the iron lead to the fan, to test whether this would work for controlling the fan speed. This worked perfectly, so I disassembled the iron and removed the small control board for fitting inside the fan housing.
 
 <figure>
   <img src={{ date | formatImagePath: "fan_with_iron_base.jpg" }} alt="Fan connected to soldering iron base station" >
   <figcaption>Fan connected to soldering iron base station.</figcaption>
 </figure>
+
+### Fan shroud
 
 The existing fan housing was designed to be inside a microwave, where it didn't matter that the back side of the fan was completely exposed. Obviously this won't be suitable for use on a bench, as various detritus such as fingers would find their way into the fan while it was spinning. I had an old fan guard lying around, most likely from an old PC, which was about the right size to cover the back face of the fan. Due to the way the fan protrudes out from the housing this alone wouldn't be sufficient though, as it didn't protect the sides.
 
@@ -50,9 +54,13 @@ After fitting the fan guard on some spare standoffs, I cut a ring from the tub a
   <figcaption>The fan shroud before and after adding the second ring of plastic.</figcaption>
 </figure>
 
+### Housing construction
+
 The housing also has large gaps on the long sides, which will become the top and bottom of the fume extractor. To cover these I made a lid and base from some pine offcuts left over from the construction of my workbench. As well as filling in the gaps, these also helped to add some weight and sturdiness to the extractor. The remaining small gaps were filled with a couple of small metal offcuts from the microwave, cut and bent to size.
 
 For the front grill, I cut the back off of the microwave where the fan was fitted, neatened the edges and bent the sides inwards to increase its stiffness. As it stands the extractor would draw fumes away from me, but they will still mix into the air in the room. To prevent this I made a simple filter from a sheet of activated carbon foam, which should absorb some of the fumes. I did have to buy this, although at £2.69 for a pack of 4 sheets (eBay China!) it wasn't expensive. The foam sheet was cut to size and sits immediately behind the metal grille.
+
+### Complete assembly
 
 The final task was fitting the PCB from the soldering iron. I managed to squeeze this into one corner, although it was a tight fit. The PCB sits very close to the filter, so to protect it from this I bent and shaped a small piece of acrylic around it as a protective guard. The mains lead was then secured to the base of the unit by a rubber p-clip, and wired up to the controller through the terminal block from the soldering iron.
 
@@ -74,6 +82,8 @@ With the PCB fitted, the fume extractor was complete. I tested it and it worked 
   </div>
   <figcaption>The completed extractor prior to painting.</figcaption>
 </figure>
+
+### External finishing
 
 To smarten it up a bit I decided to have a go at some painting. The plastic and metal parts were sanded down, then sprayed with primer, black topcoat and lacquer. The wooden pieces were varnished with three coats of yacht varnish. The final finish isn't perfect, especially as I broke one of the retaining clips during assembly due to the paint making it too tight a fit. Despite that, I still think it looks a lot better for it!
 
