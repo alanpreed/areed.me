@@ -303,6 +303,22 @@ a[href].list-tag:visited {
   color: var(--tagTextVisited);
 }
 
+/* Used for side-by-side images */
+.row {
+  display: flex;
+}
+/* Only display side-by-side if screen width is at least half maximum content width */
+@media (max-width: 40em) {
+  .row {
+    display: block;
+  }
+}
+
+.column {
+  flex: 50%;
+  padding: 5px;
+}
+
 /* Warning */
 .warning {
   background-color: #ffc;
