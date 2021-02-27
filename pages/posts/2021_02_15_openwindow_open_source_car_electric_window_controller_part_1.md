@@ -1,5 +1,5 @@
 ---
-title: "OpenWindow: open-source car electric window controller"
+title: "OpenWindow: open-source car electric window controller (part 1)"
 author: Alan Reed
 date: 2021-02-15
 description: "OpenWindow is a project to create an open-source controller for my car's electric windows. This post originally appeared as a Project14 competition entry, where it won a runner-up prize."
