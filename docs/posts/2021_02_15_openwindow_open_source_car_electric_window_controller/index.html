@@ -64,7 +64,7 @@
 <p>For flexibility, and to compensate for my limited skill in electronics, the brains of the operation will be a microcontroller. Having previously read about the EFM8 series of 8-bit microcontrollers from Silicon Labs in a Hackaday article, I decided that this project would be a good opportunity to try them out. For the prototyping presented here I used an EFM8BB2 &quot;Busy Bee&quot; development board that I had previously bought but not yet got around to using.</p>
 <p>The window switch is a three-state input (12V, floating, 0V), so I needed to drop the voltage down logic levels and work out how to detect the floating state. I decided that the easiest way would be to use a couple of comparators (built into the EFM8) along with a voltage divider. When the switch is floating, the voltage divider network pulls the comparator input to ~1.5V. On switching to 0V the comparator input is pulled to 0V and on switching to 12V it is pulled up to 3V. By using two comparators with rising and falling edge detection, one with a reference voltage of 1V and the other 2V, the EFM8 can successfully detect all of the switch states and transitions between them. I've included a rough diagram below to help visualise how this works.</p>
 <figure>
-  <img src=/images/2021-02-15/comparator_diagram.jpg alt="Diagram of switch state detection using comparators" style="max-height:30vh" >
+  <img src=/images/2021-02-15/comparator_diagram.jpg alt="Diagram of switch state detection using comparators" >
   <figcaption>Diagram of switch state detection using comparators.</figcaption>
 </figure>
 <p>To monitor the motor current, I selected a Hall-effect current sensor (Allegro ACS712). Using a sense resistor with amplifier for the task would have been difficult, as the motor current pretty large when stalled (&gt;13A) and so any sense resistor would potentially have dissipated quite a lot of power. From what I read, I also got the impression that one had to be quite careful with component layout when connecting a measurement amplifier to the sense resistor so I decided to steer clear of this entirely.</p>
@@ -99,7 +99,14 @@
 <p>After setting some appropriate current limits, the prototype controller worked quite well! One change I made after initial testing was to make the state machine more tolerant of unexpected events, as I had initially set it to enter a permanent error state if any occurred. Such events could occur during power-on, or if we are very unlucky and two events happened to occur in very close succession due to my simple control logic. The system now reports the error, then returns to idle instead of locking up.</p>
 <p>For the final product I will need to have a go at designing a PCB, as the EFM8 is only available in surface mount packages so stripboard isn't an option. I may also add some extra functionality, such as a single click to raise or lower the window fully, however I ran out of time to do these before the end of the competition.</p>
 <p>Below is a video of the prototype in action, as proof of my work for the competition. There's also a link to the project on GitHub, where the software and schematics are available if people are interested.</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/QUyG3emrrRg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="youtube-video-container">
+  <iframe 
+    src="https://www.youtube.com/embed/QUyG3emrrRg" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+</div class="youtube-video-container">
 <p><a href="https://github.com/alanpreed/OpenWindow">Link to project GitHub.</a></p>
 <p>Thanks for reading!</p>
 

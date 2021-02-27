@@ -61,7 +61,7 @@ For flexibility, and to compensate for my limited skill in electronics, the brai
 The window switch is a three-state input (12V, floating, 0V), so I needed to drop the voltage down logic levels and work out how to detect the floating state. I decided that the easiest way would be to use a couple of comparators (built into the EFM8) along with a voltage divider. When the switch is floating, the voltage divider network pulls the comparator input to ~1.5V. On switching to 0V the comparator input is pulled to 0V and on switching to 12V it is pulled up to 3V. By using two comparators with rising and falling edge detection, one with a reference voltage of 1V and the other 2V, the EFM8 can successfully detect all of the switch states and transitions between them. I've included a rough diagram below to help visualise how this works.
 
 <figure>
-  <img src={{ date | formatImagePath: "comparator_diagram.jpg" }} alt="Diagram of switch state detection using comparators" style="max-height:30vh" >
+  <img src={{ date | formatImagePath: "comparator_diagram.jpg" }} alt="Diagram of switch state detection using comparators" >
   <figcaption>Diagram of switch state detection using comparators.</figcaption>
 </figure>
 
@@ -117,7 +117,14 @@ For the final product I will need to have a go at designing a PCB, as the EFM8 i
 
 Below is a video of the prototype in action, as proof of my work for the competition. There's also a link to the project on GitHub, where the software and schematics are available if people are interested.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/QUyG3emrrRg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="youtube-video-container">
+  <iframe 
+    src="https://www.youtube.com/embed/QUyG3emrrRg" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+</div class="youtube-video-container">
 
 [Link to project GitHub.](https://github.com/alanpreed/OpenWindow)
 
