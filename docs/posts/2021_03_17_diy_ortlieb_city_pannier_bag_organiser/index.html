@@ -1,0 +1,112 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index.css">
+    <title> areed.me | DIY Ortlieb City bike pannier bag organiser</title>
+    <meta name="description" content="Official Ortlieb pannier bag organisers are expensive, so here I document my attempt to construct a homemade substitute. The finished product consists of a series of pouches sewn togther using heavy fabric, and is held inside the pannier using velcro." >
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  </head>
+  <body>
+    <header>
+
+    <h1 class="home"><a href="/"> areed.me </a></h1>
+
+    <ul class="nav">
+        <li class="nav-item"> <a href="/">home</a></li>
+        <li class="nav-item"> <a href="/tags/">tags</a></li>
+        <li class="nav-item"> <a href="/about/">about</a></li>
+    </ul>
+
+    </header>
+
+    <div class="content">
+      
+<h2>DIY Ortlieb City bike pannier bag organiser</h2>
+
+<div class="post-subtitle">
+  <h4 class="post-author"> Alan Reed </h4>
+  <h5 class="post-date">
+      17/03/2021
+  </h5>
+</div>
+
+
+<h3>Introduction</h3>
+<p>My bike pannier bags only have a single large compartment, which means that small items can easily get lost inside them. Ortlieb do sell an organiser insert with smaller pockets and pouches, but it is a bit too expensive for me. This project therefore documents my attempt at making my own organiser for the Ortlieb City bike pannier bags.</p>
+<p>The final organiser design can be found on the project Github <a href="https://github.com/alanpreed/OrtliebPannierOrganiser">here</a>, where the documentation below was originally hosted before I migrated it to this site.</p>
+<h3>Design</h3>
+<p>A suitable bag organiser design needs to meet the following requirements:</p>
+<ul>
+<li>Must have a large flat compartment for a laptop or A4 paper</li>
+<li>Must have a selection of small pockets for bits and pieces</li>
+<li>Must not take up excessive space in the bag when not in use</li>
+<li>Must be able to hold a drinks bottle upright</li>
+<li>Must hold in place inside the bag without irreversably modifying the bag</li>
+<li>Must be constructed from inexpensive materials that I have the means to work with</li>
+</ul>
+<p>Fabric is well suited for making pockets and bags, and should be more compact than a rigid organiser would be. My panniers have a plastic panel on the inside, to which the hardware that holds the bag onto the bike is attached. As I don't want to damage the bag, I've decided to use velcro to attach the organiser to this back panel. One side of the velcro will be sewn to the back of the organiser, and the other side stuck to the panel.</p>
+<p>To be able to meet my requrements for the items I want to hold, my organiser will be made out of a series of fabric pockets. These will be sewn together onto a large fabric pouch, along with some elastic for holding a bottle. The final design consists of 6 pieces of fabric:</p>
+<ul>
+<li>Two identical large panels together form the base of the organiser: a large pouch pocket that will fit an A4 book or laptop.</li>
+<li>A small strap is attached to the back at the top, which can be used to hold the pouch closed preventing the organiser from sagging open when full.</li>
+<li>A large pocket is sewn onto the front left of this, and is big enough to fit an A5 notepad. The space on the front right is used to fit a couple of elastic straps, suitable for holding a bottle upright in the bag.</li>
+<li>Two small pockets are sewn onto the front of the large pocket, one above the other. The top pocket has an internal division to form a pen holder.</li>
+</ul>
+<p>I initially turned to OpenSCAD to create the pattern pieces for my design, however it turned out that this lacked the functionality for creating a 2D line drawing suitable for use as a sewing pattern. I still wanted to use code for my parametric CAD, so for this project I tried out the scripting capabilities of QCAD.</p>
+<p>Each pattern piece is defined as a script, which can be run within QCAD by selecting Misc -&gt; Development -&gt; Run Script or by pressing XC. Unfortunately there seems to be no way to define relative script inclusion paths in QCAD, so each pattern piece has a PROJECT_PATH variable at the top that needs to be defined correctly before the script can be run.</p>
+<p>From the script for each piece, I have generated a DXF file and exported this to a PDF for ease of printing. Some dimensions have been included on the PDF exports, so that they can be measured after printing to check that the scaling is correct.</p>
+<h3>Construction</h3>
+<p>Below are the steps I followed to assemble the bag organiser. These may be obvious to anyone more experienced with sewing, but I'll leave them here anyway in case they are useful.</p>
+<ol>
+<li>Print out the pattern pieces, making sure not to scale them.</li>
+<li>Pin the pieces to some fabric, and carefully cut them out. I used a fairly heavy canvas material for durability.</li>
+<li>Fold over the seam allowance and hem, then tack and sew the hems on the three pocket pieces.</li>
+<li>Fold over the top seam allowance and hem on the two base panels, tack and sew.</li>
+<li>Tack and sew the bottom small pocket onto the large pocket.</li>
+<li>Tack and sew the top small pocket onto the large pocket. Remember to fold in the extra fabric for the pen holder along the bottom seam.</li>
+<li>Sew the pen holder divider line on the top small pocket.</li>
+<li>Tack and sew the large pocket onto the outside of one of the base panels.</li>
+<li>Cut and sew a couple of loops of elastic onto the base panel, next to the pockets, as a bottle holder. I used 10mm x 20mm loops.</li>
+<li>Cut out sections of sew-on velcro and stick-on velcro, pairing one strip of sew-on with one strip of stick-on.</li>
+<li>Sew the sew-on velcro onto the outside of the other base panel. Make sure to position these so they will avoid the fastners on the back side of the pannier bag when the stick-on side is attached.</li>
+<li>Tack and sew the base panels together inside out along the seam allowance, then turn the bag right-side out.</li>
+<li>Fold the seam allowance of the button strap over, then fold in half along the long axis and sew around the edges.</li>
+<li>Sew a button hole onto one end of the button loop, then cut the material inside the hole.</li>
+<li>Sew the button loop onto the back side of the organiser, then sew a button onto the front half so that it lines up with the hole on the loop.</li>
+<li>Position the organiser inside the pannier bag and stick the other half of the velcro pieces onto the plastic panel inside the bag.</li>
+</ol>
+<h3>Result</h3>
+<p>Assembly was straightforward using a sewing machine, even with my limited level of sewing experience. Some of the pockets are not entirely square, as I failed to account for all of the shifting and stretching of the fabric during sewing. I also originally planned to fit two pen holders, however these ended up needing more fabric that I expected so I could only fit one.</p>
+<p>Below are a couple of images of the finished organiser. The brown fabric may not be the most attractive, but it was free and should be quite hard-wearing.</p>
+<figure>
+  <div class="row">
+    <div class="column">
+      <img src=/images/2021-03-17/organiser_front.jpg alt="The front of the pannier bag organiser." >
+    </div>
+    <div class="column">
+      <img src=/images/2021-03-17/organiser_back.jpg alt="The back of the pannier bag organiser." >
+    </div>
+  </div>
+  <figcaption>The front and back of the pannier bag organiser.</figcaption>
+</figure>
+<p>The white patches here are the back of the stick-on velcro, to be used for attaching the organiser to the pannier bag. Below are a couple of images of the organiser after the velcro has been used to install it into a pannier bag, with and without some items inside it.</p>
+<figure>
+  <div class="row">
+    <div class="column">
+      <img src=/images/2021-03-17/organiser_installed.jpg alt="The pannier bag organiser installed in my pannier." >
+    </div>
+    <div class="column">
+      <img src=/images/2021-03-17/organiser_installed_items.jpg alt="The pannier bag organiser installed in my pannier, with items inside." >
+    </div>
+  </div>
+  <figcaption>The pannier bag organiser installed in my pannier, with and without items inside</figcaption>
+</figure>
+<p>The stick on velcro seems reasonably sturdy, so hopefully it will be strong enough to hold up to the rigours of everyday use. Time will tell!</p>
+
+    </div>
+  </body>
+</html>
