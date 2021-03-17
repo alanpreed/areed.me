@@ -113,7 +113,7 @@ figcaption {
   text-align: center;
 }
 
-li {
+li :not(.nav-item){
   padding-bottom: 1em;
 }
 
