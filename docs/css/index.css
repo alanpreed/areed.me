@@ -113,6 +113,10 @@ figcaption {
   text-align: center;
 }
 
+li {
+  padding-bottom: 1em;
+}
+
 .content {
   padding: 0 5%;
   padding-bottom: 3%;
