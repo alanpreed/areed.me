@@ -113,9 +113,11 @@ figcaption {
   text-align: center;
 }
 
-li :not(.nav-item){
-  padding-bottom: 1em;
+
+li:not(.nav-item){
+    padding-bottom: 1em;
 }
+
 
 .content {
   padding: 0 5%;
