@@ -85,6 +85,16 @@ module.exports = function (eleventyConfig) {
     return tagMap;
   });
 
+  eleventyConfig.addShortcode("image", function (imageName, caption) {
+    return `
+<figure>
+  <img src=${
+    "/images/" + format(this.page.date, "yyyy-MM-dd") + "/" + imageName
+  } }} alt="${caption}" >
+  <figcaption>${caption}</figcaption>
+</figure>`;
+  });
+
   return {
     dir: {
       input: "pages",
