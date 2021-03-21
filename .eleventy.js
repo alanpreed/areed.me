@@ -103,10 +103,10 @@ module.exports = function (eleventyConfig) {
       eleventyImage(inputFilePath, options);
       metadata = eleventyImage.statsSync(inputFilePath, options);
 
-      let data = metadata[imgFormat][metadata[imgFormat].length - 1];
+      let data = metadata[imgFormat][0];
 
       return `<div class="column">
-  <a class="a-img" href=${"/" + basePath + imageName}>
+  <a class="a-img" href=${"/" + basePath + imageName} target="_blank">
     <img src=${data.url} }}  alt="${caption}" >
   </a>
 </div>`;
