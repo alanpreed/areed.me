@@ -113,11 +113,9 @@ figcaption {
   text-align: center;
 }
 
-
-li:not(.nav-item){
-    padding-bottom: 1em;
+li:not(.nav-item) {
+  padding-bottom: 1em;
 }
-
 
 .content {
   padding: 0 5%;
@@ -312,6 +310,7 @@ a[href].list-tag:visited {
 /* Used for side-by-side images */
 .row {
   display: flex;
+  align-items: center;
 }
 /* Only display side-by-side if screen width is at least half maximum content width */
 @media (max-width: 40em) {
@@ -323,6 +322,9 @@ a[href].list-tag:visited {
 .column {
   flex: 50%;
   padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Warning */

@@ -163,6 +163,22 @@
     
        
         <url>
+            <loc>https://areed.me/tags/CAD/</loc>
+            <lastmod>13/02/2021</lastmod>
+            <changefreq>monthly</changefreq>
+        </url>
+        
+    
+       
+        <url>
+            <loc>https://areed.me/tags/3D printing/</loc>
+            <lastmod>13/02/2021</lastmod>
+            <changefreq>monthly</changefreq>
+        </url>
+        
+    
+       
+        <url>
             <loc>https://areed.me/posts/2021_02_15_openwindow_open_source_car_electric_window_controller_part_1/</loc>
             <lastmod>15/02/2021</lastmod>
             <changefreq>monthly</changefreq>
@@ -181,6 +197,14 @@
         <url>
             <loc>https://areed.me/posts/2021_03_17_diy_ortlieb_city_pannier_bag_organiser/</loc>
             <lastmod>17/03/2021</lastmod>
+            <changefreq>monthly</changefreq>
+        </url>
+        
+    
+       
+        <url>
+            <loc>https://areed.me/posts/2021_03_21_openwindow_open_source_car_electric_window_controller_part_2/</loc>
+            <lastmod>21/03/2021</lastmod>
             <changefreq>monthly</changefreq>
         </url>
         
