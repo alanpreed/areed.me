@@ -18,11 +18,12 @@
   },
   "homepage": "https://github.com/alanpreed/areed.me#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^0.11.1",
+    "@11ty/eleventy": "^0.12.1",
     "@11ty/eleventy-navigation": "^0.1.6",
     "date-fns": "^2.16.1"
   },
   "dependencies": {
+    "@11ty/eleventy-img": "^0.8.2",
     "lodash.chunk": "^4.2.0"
   }
 }

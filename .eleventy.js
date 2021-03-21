@@ -1,4 +1,5 @@
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
+const eleventyImage = require("@11ty/eleventy-img");
 const { format } = require("date-fns");
 const lodashChunk = require("lodash.chunk");
 
@@ -85,15 +86,45 @@ module.exports = function (eleventyConfig) {
     return tagMap;
   });
 
-  eleventyConfig.addShortcode("image", function (imageName, caption) {
-    return `
-<figure>
-  <img src=${
-    "/images/" + format(this.page.date, "yyyy-MM-dd") + "/" + imageName
-  } }} alt="${caption}" >
+  // Template for img element insertion, which also handles generation of smaller images to improve page loading
+  eleventyConfig.addLiquidShortcode(
+    "image",
+    function (imageName, caption, imgFormat = "jpeg") {
+      let basePath = "images/" + format(this.page.date, "yyyy-MM-dd") + "/";
+      let inputFilePath = "./" + basePath + imageName;
+
+      let options = {
+        widths: [600],
+        formats: [imgFormat],
+        outputDir: "./" + basePath + "generated/",
+        urlPath: "/" + basePath + "generated/",
+      };
+
+      eleventyImage(inputFilePath, options);
+      metadata = eleventyImage.statsSync(inputFilePath, options);
+
+      let data = metadata[imgFormat][metadata[imgFormat].length - 1];
+
+      return `<div class="column">
+  <a class="a-img" href=${"/" + basePath + imageName}>
+    <img src=${data.url} }}  alt="${caption}" >
+  </a>
+</div>`;
+    }
+  );
+
+  // Template for figure element insertion
+  eleventyConfig.addPairedLiquidShortcode(
+    "figure",
+    function (figureContent, caption) {
+      return `<figure>
+  <div class="row">
+    ${figureContent}
+  </div>
   <figcaption>${caption}</figcaption>
 </figure>`;
-  });
+    }
+  );
 
   return {
     dir: {
