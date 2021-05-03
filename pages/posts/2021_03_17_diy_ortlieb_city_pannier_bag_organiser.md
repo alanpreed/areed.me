@@ -66,30 +66,16 @@ Assembly was straightforward using a sewing machine, even with my limited level 
 
 Below are a couple of images of the finished organiser. The brown fabric may not be the most attractive, but it was free and should be quite hard-wearing.
 
-<figure>
-  <div class="row">
-    <div class="column">
-      <img src={{ date | formatImagePath: "organiser_front.jpg" }} alt="The front of the pannier bag organiser." >
-    </div>
-    <div class="column">
-      <img src={{ date | formatImagePath: "organiser_back.jpg" }} alt="The back of the pannier bag organiser." >
-    </div>
-  </div>
-  <figcaption>The front and back of the pannier bag organiser.</figcaption>
-</figure>
+{% figure "The front and back of the pannier bag organiser." %}
+{% image "organiser_front.jpg" "The front of the pannier bag organiser." %}
+{% image "organiser_back.jpg" "The back of the pannier bag organiser." %}
+{% endfigure %}
 
 The white patches here are the back of the stick-on velcro, to be used for attaching the organiser to the pannier bag. Below are a couple of images of the organiser after the velcro has been used to install it into a pannier bag, with and without some items inside it.
 
-<figure>
-  <div class="row">
-    <div class="column">
-      <img src={{ date | formatImagePath: "organiser_installed.jpg" }} alt="The pannier bag organiser installed in my pannier." >
-    </div>
-    <div class="column">
-      <img src={{ date | formatImagePath: "organiser_installed_items.jpg" }} alt="The pannier bag organiser installed in my pannier, with items inside." >
-    </div>
-  </div>
-  <figcaption>The pannier bag organiser installed in my pannier, with and without items inside</figcaption>
-</figure>
+{% figure "The pannier bag organiser installed in my pannier, with and without items inside." %}
+{% image "organiser_installed.jpg" "The pannier bag organiser installed in my pannier." %}
+{% image "organiser_installed_items.jpg" "The pannier bag organiser installed in my pannier, with items inside."%}
+{% endfigure %}
 
 The stick on velcro seems reasonably sturdy, so hopefully it will be strong enough to hold up to the rigours of everyday use. Time will tell!

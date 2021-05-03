@@ -80,7 +80,7 @@ When I designed the case, I intended to mount the current PCB on a couple of nyl
 Once the PCB was assembled (after waiting for the parts I forgot to order) and the case was printed, I needed to make up the wiring necessary to connect everything inside the case as shown in the diagram below.
 
 {% figure "Openwindow enclosure wiring diagram." %}
-{% image  "Case_wiring_diagram.png" "Openwindow enclosure wiring diagram." "png" %}
+{% image  "Case_wiring_diagram.png" "Openwindow enclosure wiring diagram." 600 "png" %}
 {% endfigure %}
 
 The relays were easiest, as the sockets for these already had wires installed that just needed to be cut to length. Once they were in I had to replace the 0.1" header on the current measurement PCB with a JST connector, as the standard headers were too tall and would conflict with the relay sockets. Fortunately the JST XH connector was just short enough to squeeze into the gap, making the cable for this a simple 3-wire affair between two JST XH connectors. For the input to the main PCB I used some heavier gauge wire, as the main board needs to supply some current to the relay coils.

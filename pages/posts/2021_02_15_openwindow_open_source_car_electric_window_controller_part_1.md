@@ -25,10 +25,9 @@ This post first appeared as a competition entry for the Project14 Control System
 
 Some time ago, I replaced the electric window mechanism in the driver's door of my car. The new part was of a different design to the old, and had no controller - just a 2-wire motor. Universal electric window controllers that do anything beyond simple switching, such as stall detection etc., don't seem to exist so in the end I stripped the controller out of the old mechanism (pictured below) and connected it to the new one.
 
-<figure>
-  <img src={{ date | formatImagePath: "old_connector.jpg" }} alt="Old window controller." >
-  <figcaption>My car's original electric window controller.</figcaption>
-</figure>
+{% figure "My car's original electric window controller." %}
+{% image "old_connector.jpg" "Old window controller." %}
+{% endfigure %}
 
 This sort of worked, although because the new motor was different the controller was not happy. The window would only move in 2" increments before stopping, presumably because the controller believed it was stalling. Additionally, pressing and holding the switch with the window open or closed to teach the controller where the window limits were would result in a window that wouldn't open at all. However, being short of time I decided that this would be "good enough for now" and made a note to make a replacement controller in the future.
 
@@ -45,10 +44,9 @@ A suitable replacement window controller must achieve the following:
 
 The window controller connects to my car's wiring harness through a five-pin connector inside the door. Thanks to the people over at the Briskoda.net forums, I have a handy diagram of the pinout for this connector in my car:
 
-<figure>
-  <img src={{ date | formatImagePath: "connector.gif" }} alt="Skoda Felicia window controller connector pinout." >
-  <figcaption>Skoda Felicia window controller connector pinout.</figcaption>
-</figure>
+{% figure "Skoda Felicia window controller connector pinout." %}
+{% image "connector.gif" "Skoda Felicia window controller connector pinout."%}
+{% endfigure %}
 
 GND and +BATT supply +12V power to the controller, and are always connected. IGN is switched to +12V when the car's ignition is on, and is 0V otherwise. Finally, the connection to the window switch is pulled to +12V when the switch is moved to raise, 0V when the switch is moved to lower, and left unconnected otherwise.
 
@@ -60,10 +58,9 @@ For flexibility, and to compensate for my limited skill in electronics, the brai
 
 The window switch is a three-state input (12V, floating, 0V), so I needed to drop the voltage down logic levels and work out how to detect the floating state. I decided that the easiest way would be to use a couple of comparators (built into the EFM8) along with a voltage divider. When the switch is floating, the voltage divider network pulls the comparator input to ~1.5V. On switching to 0V the comparator input is pulled to 0V and on switching to 12V it is pulled up to 3V. By using two comparators with rising and falling edge detection, one with a reference voltage of 1V and the other 2V, the EFM8 can successfully detect all of the switch states and transitions between them. I've included a rough diagram below to help visualise how this works.
 
-<figure>
-  <img src={{ date | formatImagePath: "comparator_diagram.jpg" }} alt="Diagram of switch state detection using comparators" >
-  <figcaption>Diagram of switch state detection using comparators.</figcaption>
-</figure>
+{% figure "Diagram of switch state detection using comparators" %}
+{% image "comparator_diagram.jpg" "Diagram of switch state detection using comparators" 800 %}
+{% endfigure %}
 
 To monitor the motor current, I selected a Hall-effect current sensor (Allegro ACS712). Using a sense resistor with amplifier for the task would have been difficult, as the motor current pretty large when stalled (>13A) and so any sense resistor would potentially have dissipated quite a lot of power. From what I read, I also got the impression that one had to be quite careful with component layout when connecting a measurement amplifier to the sense resistor so I decided to steer clear of this entirely.
 
@@ -73,17 +70,15 @@ For the ignition switching, I used a MOSFET high-side switch to control the 12V 
 
 Prior to the ignition switching circuit, I included in the design a TVS diode and N FET for transient spike and reverse polarity protection just in case, as the car electrical system can be a harsh environment. Finally, for the motor control I used a couple of SPDT automotive relays, switched by the EFM8 through a couple of small NPN transistors with flyback diodes across the coils. The complete circuit diagram for the prototype is shown below.
 
-<figure>
-  <img src={{ date | formatImagePath: "schematic_v2.png" }} alt="OpenWindow prototype schematic" >
-  <figcaption>OpenWindow prototype schematic.</figcaption>
-</figure>
+{% figure "OpenWindow prototype schematic." %}
+{% image "schematic_v2.png" "OpenWindow prototype schematic." 900%}
+{% endfigure %}
 
 Here is the complete prototype assembled on the desk:
 
-<figure>
-  <img src={{ date | formatImagePath: "prototype.jpg" }} alt="The completed OpenWindow prototype" >
-  <figcaption>The completed OpenWindow prototype.</figcaption>
-</figure>
+{% figure "The completed OpenWindow prototype" %}
+{% image "prototype.jpg" "The completed OpenWindow prototype" %}
+{% endfigure %}
 
 ### Software development
 
@@ -95,19 +90,17 @@ Having sorted the text-based debug output, I focussed on getting the other neces
 
 After getting all of the peripherals tested and working individually, I needed to tie everything together and make the control logic. As is often the case for embedded systems, I decided to use a simple state machine for this as diagrammed below.
 
-<figure>
-  <img src={{ date | formatImagePath: "State_machine.png" }} alt="OpenWindow state machine diagram" >
-  <figcaption>OpenWindow state machine diagram.</figcaption>
-</figure>
+{% figure "OpenWindow state machine diagram" %}
+{% image "State_machine.png" "OpenWindow state machine diagram" 700 "png" %}
+{% endfigure %}
 
 Here I hit my second major pitfall. I initially wrote a fancy state-machine for my system, involving judicious use of structs and function pointers. When I came to try it out, I found that the absence of a certain print statement (even if completely empty) would cause the chip to constantly reset. After much debugging and head-scratching, I read online that function pointers on the 8051 are apparently something to be handled sparingly and with care. Eventually, having still been unable to fix it I decided to lose the day's work and write a simpler implementation, rather than risk the flakiness of the more complex one. The simple state machine does not have a queue for events, relying on events being quite infrequent in this system.
 
 The final stage in the project was to test the prototype in the car, to work out some empirical current limits for the window motor. As is often the case with automotive electronics, the connector for the window controller on the wiring harness is a strange waterproof connector that is hard to get hold of. For the final product I should be able to pick one up from China, but the lead times are very long. Thus, for the purposes of testing the prototype for this competition, I jury-rigged an interface out of some sections of old packing staples. Below is a photo of the final prototype balanced on a seat in the car, ready for testing.
 
-<figure>
-  <img src={{ date | formatImagePath: "in_car.jpg" }} alt="OpenWindow prototype in car ready for testing" >
-  <figcaption>OpenWindow prototype in car ready for testing.</figcaption>
-</figure>
+{% figure "OpenWindow prototype in car ready for testing" %}
+{% image "in_car.jpg" "OpenWindow prototype in car ready for testing" %}
+{% endfigure %}
 
 ### Results
 
