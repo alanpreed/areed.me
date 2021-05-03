@@ -91,12 +91,12 @@ module.exports = function (eleventyConfig) {
   // Template for img element insertion, which also handles generation of smaller images to improve page loading
   eleventyConfig.addLiquidShortcode(
     "image",
-    function (imageName, caption, imgFormat = "jpeg") {
+    function (imageName, caption, width = 600, imgFormat = "jpeg") {
       let basePath = "images/" + format(this.page.date, "yyyy-MM-dd") + "/";
       let inputFilePath = "./" + basePath + imageName;
 
       let options = {
-        widths: [600],
+        widths: [width],
         formats: [imgFormat],
         outputDir: "./" + basePath + "generated/",
         urlPath: "/" + basePath + "generated/",
