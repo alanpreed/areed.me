@@ -1,8 +1,8 @@
 ---
-title: "Improving page load times with eleventy-image"
+title: "Improving page load times with Eleventy's image plugin"
 author: Alan Reed
 date: 2021-04-01
-description: "A short post, outlining my creation of shortcodes to simplify image insertion.  Using eleventy-image within these, compressed images are generated when the site is built to reduce page load times."
+description: "A short post, outlining my creation of shortcodes to simplify image insertion.  Using Eleventy's image plugin within these, compressed images are generated when the site is built to reduce page load times."
 tags: [areed.me, eleventy, web]
 layout: layouts/post.njk
 ---
