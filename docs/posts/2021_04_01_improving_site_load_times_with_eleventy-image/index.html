@@ -1,0 +1,70 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index.css">
+    <title> areed.me | Improving page load times with eleventy-image</title>
+    <meta name="description" content="A short post, outlining my creation of shortcodes to simplify image insertion.  Using eleventy-image within these, compressed images are generated when the site is built to reduce page load times." >
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  </head>
+  <body>
+    <header>
+
+    <h1 class="home"><a href="/"> areed.me </a></h1>
+
+    <ul class="nav">
+        <li class="nav-item"> <a href="/">home</a></li>
+        <li class="nav-item"> <a href="/tags/">tags</a></li>
+        <li class="nav-item"> <a href="/about/">about</a></li>
+    </ul>
+
+    </header>
+
+    <div class="content">
+      
+<h2>Improving page load times with eleventy-image</h2>
+
+<div class="post-subtitle">
+  <h4 class="post-author"> Alan Reed </h4>
+  <h5 class="post-date">
+      01/04/2021
+  </h5>
+</div>
+
+
+<p>Having written a few posts for this site, I found that when viewing them on the live site the post pages would take a long time to load. Most of them contained quite a few high-resolution images, and the user experience was somewhat degraded by sitting and watching these slowly render from top to bottom like the output from some ancient printer.</p>
+<figure>
+  <div class="row">
+<div class="column">
+  <a class="a-img" href=/images/2021-04-01/slow_loading.png target="_blank">
+    <img src=/images/2021-04-01/generated/3b44b5dd-600.jpeg }}  alt="Example of a half-loaded image." >
+  </a>
+</div>
+  </div>
+  <figcaption>A common sight with large embedded images: half-loaded images.</figcaption>
+</figure>
+<p>Photos from my camera or my phone range in size from about 1-4MB after processing and cropping, though some can be as large as 10MB. When a page contains multiple images, as posts here are likely to do, they can therefore quickly add up to a fairly hefty download. The simplest fix would be to replace all image files with lower-resolution ones, although it would be a bit of a pain to have to do this manually for every image. I also like having the larger images available on the site for the extra detail that they can provide, so this approach really didn't appeal.</p>
+<h3>The solution</h3>
+<p>The simplest way that I could think of to improve page loading, while also keeping the original images accessible, was to use compressed images in the post pages as hyperlinks that link to the original image files. With this setup the compressed images load quickly on the page, while the original detailed images are still available if required by clicking on the compressed ones.</p>
+<p>A priority for this site was to make writing as easy as possible, so there was no way that I wanted a setup where I would have to manually create a compressed copy of every image that I intended to include in all writeups. Fortunately, I was able to avoid this by taking advantage of the Eleventy <a href="https://www.11ty.dev/docs/plugins/image/">image plugin</a>. This can be configured to run whenever Eleventy is used to build the static site, generating and saving a compressed copy of any image provided to it.</p>
+<p>Using the Eleventy image plugin requires writing some JavaScript, so it seems to normally be implemented by creating an <a href="https://www.11ty.dev/docs/shortcodes/">Eleventy shortcode</a> for image insertion. Shortcodes are defined as a function, within which code can be run, and when used in a Markdown file the function's return value (normally a HTML string) will be inserted into the document directly.</p>
+<p>Where images are used on this site, I've wrapped them inside a <code>figure</code> element so that a caption can be displayed under the image. This requires a bunch of boilerplate HTML that, until now, needed to be pasted in every time. For example, below is the HTML I used to include an image in the first post that I wrote for this site:</p>
+<pre><code>&lt;figure&gt;
+  &lt;img src=undefinedgithub_setup.png alt=&quot;GitHub pages configuration for the site's repository.&quot;/&gt;
+  &lt;figcaption&gt;GitHub pages configuration for the site's repository.&lt;/figcaption&gt;
+&lt;/figure&gt;
+</code></pre>
+<p>To make things as simple as possible, when setting up the image plugin I took the opportunity to fold this HTML into a pair of shortcodes at the same time. My <code>image</code> shortcode takes an image filename and alt text as inputs, and uses the image plugin to generate an <code>image</code> element that displays a compressed version of the image with a link to the original file. The <code>figure</code> shortcode is a &quot;paired shortcode&quot;, meaning that it has separate start and end tags. This takes a caption as an argument, and wraps everything between its tags inside a <code>figure</code> element. This therefore makes it possible to have multiple sub-images per figure, as I have used in previous posts, simply by using multiple <code>image</code> shortcodes within one pair of <code>figure</code> shortcodes.</p>
+<p>Including images in posts is now very simple, and requires writing no HTML. For example, the image featured in this post was added using just the following three lines, most of which consists of the caption and alt-text:</p>
+<pre><code>{% figure &quot;A common sight with large embedded images: half-loaded images.&quot; %}
+{% image  slow_loading.png&quot; &quot;Example of a half-loaded image.&quot; %}
+{% endfigure %}
+</code></pre>
+<p>Thanks for reading!</p>
+
+    </div>
+  </body>
+</html>
