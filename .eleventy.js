@@ -1,10 +1,12 @@
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const eleventyImage = require("@11ty/eleventy-img");
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const { format } = require("date-fns");
 const lodashChunk = require("lodash.chunk");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
+  eleventyConfig.addPlugin(syntaxHighlight);
 
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy("images");

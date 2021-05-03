@@ -25,17 +25,27 @@ Using the Eleventy image plugin requires writing some JavaScript, so it seems to
 
 Where images are used on this site, I've wrapped them inside a `figure` element so that a caption can be displayed under the image. This requires a bunch of boilerplate HTML that, until now, needed to be pasted in every time. For example, below is the HTML I used to include an image in the first post that I wrote for this site:
 
-    <figure>
-      <img src={{ image_path | append: "github_setup.png" }} alt="GitHub pages configuration for the site's repository."/>
-      <figcaption>GitHub pages configuration for the site's repository.</figcaption>
-    </figure>
+{% highlight html %}
+
+<figure>
+  <img src={{ image_path | append: "github_setup.png" }} alt="GitHub pages configuration for the site's repository."/>
+  <figcaption>GitHub pages configuration for the site's repository.</figcaption>
+</figure>
+
+{% endhighlight %}
 
 To make things as simple as possible, when setting up the image plugin I took the opportunity to fold this HTML into a pair of shortcodes at the same time. My `image` shortcode takes an image filename and alt text as inputs, and uses the image plugin to generate an `image` element that displays a compressed version of the image with a link to the original file. The `figure` shortcode is a "paired shortcode", meaning that it has separate start and end tags. This takes a caption as an argument, and wraps everything between its tags inside a `figure` element. This therefore makes it possible to have multiple sub-images per figure, as I have used in previous posts, simply by using multiple `image` shortcodes within one pair of `figure` shortcodes.
 
 Including images in posts is now very simple, and requires writing no HTML. For example, the image featured in this post was added using just the following three lines, most of which consists of the caption and alt-text:
 
-{{'    {% figure "A common sight with large embedded images: half-loaded images."'}} %}
-{{'    {% image  slow_loading.png" "Example of a half-loaded image."'}} %}
-{{'    {% endfigure'}} %}
+{% highlight markdown %}
+
+{% figure "A common sight with large embedded images: half-loaded images." %}
+{% image  "slow_loading.png" "Example of a half-loaded image." %}
+{% endfigure %}
+
+{% endhighlight %}
+
+As a bonus, I also added the Eleventy [syntax highlighting plugin](https://www.11ty.dev/docs/plugins/syntaxhighlight/) to improve the formatting of the code snippets on this post. Setting this up was simple. After installing the plugin with NPM I had to add two lines to `.eleventy.js` to import it, download a CSS file for the theme (Okaidia), and include this in the base layout file. Usage was also very easy; all that was required was wrapping the code snippets within the `highlight` paired shortcode, including the name of the language to highlight as an argument. The plugin uses PrismJS to generate the formatted code blocks, which supports a [wide range of languages](https://prismjs.com/#languages-list) and should therefore be perfect for any future posts about programming.
 
 Thanks for reading!
