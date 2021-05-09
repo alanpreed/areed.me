@@ -1,0 +1,139 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/prism.css">
+    <title> areed.me | Setting up Raspberry Pi Pico development with picoprobe in VSCode on Arch Linux</title>
+    <meta name="description" content="An overview of the setup process for Raspberry Pi Pico development, using picoprobe in VSCode on Arch Linux." >
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  </head>
+  <body>
+    <header>
+
+    <h1 class="home"><a href="/"> areed.me </a></h1>
+
+    <ul class="nav">
+        <li class="nav-item"> <a href="/">home</a></li>
+        <li class="nav-item"> <a href="/tags/">tags</a></li>
+        <li class="nav-item"> <a href="/about/">about</a></li>
+    </ul>
+
+    </header>
+
+    <div class="content">
+      
+<h2>Setting up Raspberry Pi Pico development with picoprobe in VSCode on Arch Linux</h2>
+
+<div class="post-subtitle">
+  <h4 class="post-author"> Alan Reed </h4>
+  <h5 class="post-date">
+      09/05/2021
+  </h5>
+</div>
+
+
+<h3>Introduction</h3>
+<p>The <a href="https://www.raspberrypi.org/documentation/rp2040/getting-started/">Getting Started documentation</a> for the new Raspberry Pi Pico board is generally very good, however it covers a lot of possible arrangements and most of the setup instructions for Linux are specific to Linux running on the Raspberry Pi. Those that aren't tend to cover Ubuntu/Debian based distributions, so I've written this post as a brief overview of the setup process that's more specific to Arch Linux.</p>
+<p>Although the Raspberry Pi Pico can be programmed via USB, by plugging it into a computer with the BOOTSEL button pressed and then copying a UF2 file onto the mass storage device that appears, this method is not ideal for software development. Repeated programming requires disconnecting and reconnecting the board, and there is no facility for debugging the program once it is flashed onto the Pico. A better solution for development is to program the Pico via the 3-pin SWD interface on the PCB, which is the goal of this post.</p>
+<p>Extensive use of the official <a href="https://datasheets.raspberrypi.org/pico/getting-started-with-pico.pdf">&quot;Getting started with Raspberry Pi Pico&quot; guide</a> will be made throughout, so it's worth keeping a copy of this to hand.</p>
+<h3>Hardware setup</h3>
+<p>As explained in <a href="https://datasheets.raspberrypi.org/pico/getting-started-with-pico.pdf#swd-program">Chapter 5 of the official guide</a>, if you are working from a regular Raspberry Pi then the Pico's SWD interface can be connected directly to this.  I personally prefer to use my desktop PC for software development, which unsurprisingly does not have a set of conveniently accessible GPIO pins that can be used for SWD.  Fortunately, the Raspberry Pi Foundation has developed a solution for this in the form of a tool called <code>picoprobe</code>. When a Pico has been flashed with the <code>picoprobe</code> firmware, it can be connected to a PC via USB and used to program and debug another Pico via SWD. For this guide we will therefore need two Picos with all header pins soldered on, and sufficient jumper wires to connect them up so that the second can be programmed via SWD.</p>
+<p>Below is the diagram from <a href="https://datasheets.raspberrypi.org/pico/getting-started-with-pico.pdf#picoprobe_section">Appendix A of the official guide</a>, which covers the use of <code>picoprobe</code> in more detail, illustrating how two Picos may be connected together when using <code>picoprobe</code>.  Note that the orange and yellow connections are optional; <code>picoprobe</code> also provides UART passthrough to the PC to allow communication with the Pico being programmed if this is desired.</p>
+<figure>
+  <div class="row">
+<div class="column">
+  <a class="a-img" href=/images/2021-05-09/picoprobe_diagram.png target="_blank">
+    <img src=/images/2021-05-09/generated/d833cf5f-600.jpeg }}  alt="Example of a half-loaded image." >
+  </a>
+</div>
+  </div>
+  <figcaption>Official diagram of picoprobe connections, including power and UART passthrough. (source: Raspberry Pi Foundation)</figcaption>
+</figure>
+<p>A prebuilt UF2 file for <code>picoprobe</code> is available for download from the official site <a href="https://www.raspberrypi.org/documentation/rp2040/getting-started/static/fec949af3d02572823529a1b8c1140a7/picoprobe.uf2">here</a>, and can be flashed onto a Pico via USB as described previously. Once the board has been programmed, the green LED should light up when it is connected to the PC.</p>
+<h3>Installing prerequisites</h3>
+<p>To develop projects for the Pi Pico, we will need to set up the toolchain, debugger and IDE.  The necessary packages on Arch Linux for the toolchain should be <code>arm-none-eabi-gcc</code>, <code>arm-none-eabi-newlib</code> and <code>cmake</code>, as well as the Pico SDK. The latter can be downloaded manually as described in <a href="https://datasheets.raspberrypi.org/pico/getting-started-with-pico.pdf#_the_sdk">Chapter 2</a>, however I chose to install the AUR package <code>raspberry-pico-sdk-git</code> instead.  This also configures the PICO_SDK_PATH environment variable for us, which will be used by VSCode.</p>
+<p>For debug and programming, the <code>arm-none-eabi-gdb</code> package  will also be required. <code>picoprobe</code> connects to the PC using <code>openocd</code>, which needs to have been compiled with the <code>picoprobe</code> driver enabled. Again this could be done manually as described in <a href="https://datasheets.raspberrypi.org/pico/getting-started-with-pico.pdf#_linux">Appendix A</a>, but I instead chose to install the AUR package <code>openocd-picoprobe</code> which provides this for us.</p>
+<p>Finally, <code>visual-studio-code-bin</code> will need to be installed from the AUR. The open-source build in the official repositories lacks access to the marketplace, and we need to install the following three extensions from there: <a href="https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug">cortex-debug</a>, <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">c/c++ tools</a> and <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools">cmake tools</a>.</p>
+<h3>Grant non-root access to <code>openocd</code></h3>
+<p>By default, <code>openocd</code> will fail to connect to the <code>picoprobe</code>-flashed Pico unless it is run as root.  This can be fixed by creating a <code>udev</code> rules file for <code>openocd</code> in <code>/etc/udev/rules.d</code>.  When I installed <code>openocd-picoprobe</code> it did provide a rules file, <code>/usr/lib/udev/rules.d/60-openocd.rules</code>, that could be copied into the correct directory. However, I found that there were a couple of issues with this - the most significant one being that, at the time of writing, it contained no entry for picoprobe. The other entries in this file also made use of the <code>plugdev</code> group, which is apparently <a href="https://bugs.archlinux.org/task/47205">obsolete</a>. After some testing I found that the following rule file entry was sufficient to grant non-root USB access for <code>openocd</code> on my machine, without having to create or modify any user groups:</p>
+<figure>
+  <div class="row">
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># /etc/udev/rules.d/60-openocd.rules </span><br><span class="token comment"># Raspberry Pi Picoprobe</span><br>ATTRS<span class="token punctuation">{</span>idVendor<span class="token punctuation">}</span><span class="token operator">==</span><span class="token string">"2e8a"</span>, ATTRS<span class="token punctuation">{</span>idProduct<span class="token punctuation">}</span><span class="token operator">==</span><span class="token string">"0004"</span>, <span class="token assign-left variable">TAG</span><span class="token operator">+=</span><span class="token string">"uaccess"</span></code></pre>
+  </div>
+  <figcaption><code>udev</code> rules entry for <code>picoprobe</code> USB access.</figcaption>
+</figure>
+<p>To test that this configuration has worked, <code>openocd</code> can be instructed to attempt to connect to a <code>picoprobe</code>-flashed Pico by using the command below.  Remember that the <code>picoprobe</code>-flashed Pico needs to be connected to the PC before running this...</p>
+<figure>
+  <div class="row">
+<pre class="language-bash"><code class="language-bash">$ openocd -f interface/picoprobe.cfg -f target/rp2040.cfg -s tcl</code></pre>
+  </div>
+  <figcaption>Command for connecting <code>openocd</code> to <code>picoprobe</code>.</figcaption>
+</figure>
+<p>If everything works, you should receive output similar to that shown below. Permissions changes should be updated automatically, although you will likely have to disconnect and reconnect the <code>picoprobe</code> Pico. In the event that they do not, either restart the PC or force a reload of the <code>udev</code> configuration via the command <code>#udevadm control --reload</code>.</p>
+<figure>
+  <div class="row">
+<pre class="language-text"><code class="language-text">Open On-Chip Debugger 0.10.0+dev-geb22aceb5 (2021-05-03-20:31)<br>Licensed under GNU GPL v2<br>For bug reports, read<br>	http://openocd.org/doc/doxygen/bugs.html<br>Info : only one transport option; autoselect 'swd'<br>Warn : Transport "swd" was already selected<br>adapter speed: 5000 kHz<br><br>Info : Hardware thread awareness created<br>Info : Hardware thread awareness created<br>Info : RP2040 Flash Bank Command<br>Info : Listening on port 6666 for tcl connections<br>Info : Listening on port 4444 for telnet connections<br>Info : clock speed 5000 kHz<br>Info : SWD DPIDR 0x0bc12477<br>Info : SWD DLPIDR 0x00000001<br>Info : SWD DPIDR 0x0bc12477<br>Info : SWD DLPIDR 0x10000001<br>Info : rp2040.core0: hardware has 4 breakpoints, 2 watchpoints<br>Info : rp2040.core1: hardware has 4 breakpoints, 2 watchpoints<br>Info : starting gdb server for rp2040.core0 on 3333<br>Info : Listening on port 3333 for gdb connections</code></pre>
+  </div>
+  <figcaption>Terminal output when `openocd` runs successfully.</figcaption>
+</figure>
+<h3>Set up a project for building</h3>
+<p>At this point the toolchain and debug tools should be ready to use, however before we configure VSCode we need an actual project to work with.  There are three main options here:</p>
+<ol>
+<li>Clone the <a href="https://github.com/raspberrypi/pico-examples">official example projects repository</a>.</li>
+<li>Create a new project manually, as described at the start of <a href="https://datasheets.raspberrypi.org/pico/getting-started-with-pico.pdf#creating_your_own">chapter 8 of the official guide</a>.</li>
+<li>Create a new project using the official <a href="https://github.com/raspberrypi/pico-project-generator">Pico project generator</a>, as described in <a href="https://datasheets.raspberrypi.org/pico/getting-started-with-pico.pdf#_automating_project_creation">chapter 8.3 of the official guide</a>.</li>
+</ol>
+<p>The example projects repository contains many small projects that demonstrate various aspects of the Pico, including simple ones such as <code>blink</code> and <code>hello_uart</code> that are perfect for checking that the PC's development setup is working correctly. I therefore chose the first option for this  guide, cloned the repository and opened it in VSCode.</p>
+<p>Once the project has been opened, the <code>cmake</code> extension will ask you to select a compiler as described in <a href="https://datasheets.raspberrypi.org/pico/getting-started-with-pico.pdf#vscode_loading_a_project">chapter 7.2</a>. Make sure to select &quot;GCC arm-none-eabi&quot;; this should then appear in the toolbar at the bottom of VSCode.</p>
+<h3>Configuring VSCode debug settings</h3>
+<p>Debug settings for VSCode projects are stored within a <code>launch.json</code> file, usually located within a folder called <code>.vscode</code> in the root directory of the project. More information about creating launch configurations can be found in the <a href="https://code.visualstudio.com/Docs/editor/debugging#_launch-configurations">official VSCode documentation</a>, however in our case the Pico example projects repository comes with a couple of example configurations, located within the <code>ide/vscode</code> directory, that we can use as a starting point. To use either of these files, they will need to be renamed to <code>launch.json</code> and moved inside the <code>.vscode</code> directory.</p>
+<p>The first example file, <code>launch-remote-openocd.json</code>, is intended to configure VSCode to connect to an external <code>openocd</code> process that is already running. This config file is slightly simpler, although it does requre <code>openocd</code> to be running in a separate terminal as it was earlier in this guide when we tested non-root USB access.  To configure this for Arch Linux, changing <code>gdbPath</code> to <code>arm-none-eabi-gdb</code> and <code>gdbTarget</code> to &quot;localhost:3333&quot; - or whatever port the <code>openocd</code> process started listening on when it was started, if this was not 3333 - should be sufficient. Below is the example file modified as described.</p>
+<figure>
+  <div class="row">
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"0.2.0"</span><span class="token punctuation">,</span><br>  <span class="token property">"configurations"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Pico Debug"</span><span class="token punctuation">,</span><br>      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"cortex-debug"</span><span class="token punctuation">,</span><br>      <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"${workspaceRoot}"</span><span class="token punctuation">,</span><br>      <span class="token property">"executable"</span><span class="token operator">:</span> <span class="token string">"${command:cmake.launchTargetPath}"</span><span class="token punctuation">,</span><br>      <span class="token property">"request"</span><span class="token operator">:</span> <span class="token string">"launch"</span><span class="token punctuation">,</span><br>      <span class="token property">"servertype"</span><span class="token operator">:</span> <span class="token string">"external"</span><span class="token punctuation">,</span><br>      <span class="token property">"gdbPath"</span> <span class="token operator">:</span> <span class="token string">"arm-none-eabi-gdb"</span><span class="token punctuation">,</span><br>      <span class="token property">"gdbTarget"</span><span class="token operator">:</span> <span class="token string">"localhost:3333"</span><span class="token punctuation">,</span><br>      <span class="token property">"svdFile"</span><span class="token operator">:</span> <span class="token string">"${env:PICO_SDK_PATH}/src/rp2040/hardware_regs/rp2040.svd"</span><span class="token punctuation">,</span><br>      <span class="token property">"runToMain"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span><br>      <span class="token comment">// Work around for stopping at main on restart</span><br>      <span class="token property">"postRestartCommands"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>          <span class="token string">"break main"</span><span class="token punctuation">,</span><br>          <span class="token string">"continue"</span><br>      <span class="token punctuation">]</span><br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">]</span><br><span class="token punctuation">}</span></code></pre>
+  </div>
+  <figcaption>VSCode <code>picoprobe</code> remote debug <code>launch.json</code> configuration file for Arch Linux</figcaption>
+</figure>
+<p>The above setup does work, although having to remember to keep <code>openocd</code> running separately is not ideal. Fortunately the second example file, <code>launch-raspberrypi-swd.json</code>, demonstrates how to configure VSCode to handle launching <code>openocd</code> automatically when debugging starts . As the name suggests, this file is aimed at development on the Raspberry Pi although it is straightforward to alter this for desktop development on Arch. The <code>configFiles</code> <code>interface</code> subfield needs to be corrected to <code>interface/picoprobe.cfg</code>, and <code>gdbPath</code> should be changed to <code>arm-none-eabi-gdb</code> as before.  Note that <code>openocd</code> needs to be able to run without root access in order for this setup to work, otherwise the remote debug configuration will have to be used.</p>
+<figure>
+  <div class="row">
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"0.2.0"</span><span class="token punctuation">,</span><br>  <span class="token property">"configurations"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Pico Debug"</span><span class="token punctuation">,</span><br>      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"cortex-debug"</span><span class="token punctuation">,</span><br>      <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"${workspaceRoot}"</span><span class="token punctuation">,</span><br>      <span class="token property">"executable"</span><span class="token operator">:</span> <span class="token string">"${command:cmake.launchTargetPath}"</span><span class="token punctuation">,</span><br>      <span class="token property">"request"</span><span class="token operator">:</span> <span class="token string">"launch"</span><span class="token punctuation">,</span><br>      <span class="token property">"servertype"</span><span class="token operator">:</span> <span class="token string">"openocd"</span><span class="token punctuation">,</span><br>      <span class="token property">"configFiles"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>        <span class="token string">"interface/picoprobe.cfg"</span><span class="token punctuation">,</span><br>        <span class="token string">"target/rp2040.cfg"</span><br>      <span class="token punctuation">]</span><span class="token punctuation">,</span><br>      <span class="token property">"gdbPath"</span> <span class="token operator">:</span> <span class="token string">"arm-none-eabi-gdb"</span><span class="token punctuation">,</span><br>      <span class="token property">"device"</span><span class="token operator">:</span> <span class="token string">"RP2040"</span><span class="token punctuation">,</span><br>      <span class="token property">"svdFile"</span><span class="token operator">:</span> <span class="token string">"${env:PICO_SDK_PATH}/src/rp2040/hardware_regs/rp2040.svd"</span><span class="token punctuation">,</span><br>      <span class="token property">"runToMain"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span><br>      <span class="token comment">// Work around for stopping at main on restart</span><br>      <span class="token property">"postRestartCommands"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>          <span class="token string">"break main"</span><span class="token punctuation">,</span><br>          <span class="token string">"continue"</span><br>      <span class="token punctuation">]</span><span class="token punctuation">,</span><br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">]</span><br><span class="token punctuation">}</span></code></pre>
+  </div>
+  <figcaption>VSCode <code>picoprobe</code> debug <code>launch.json</code> configuration file for Arch Linux, with automatic <code>openocd</code> launching.</figcaption>
+</figure>
+<p>Above is my <code>launch.json</code> with these changes implemented; this is the configuration I expect to use for future work with the Pico. I also chose to copy the <code>settings.json</code> file from <code>ide/vscode</code> in the example projects repository into <code>.vscode</code>; this is recommended as it tweaks the <code>cmake</code> plugin to ensure that it works with <code>cortex-debug</code> instead of trying to run Pico code on the host PC.</p>
+<h3>Running a project</h3>
+<p>With VSCode configured, including the <code>settings.json</code> file from the example repository, the bottom bar should look something like the one shown below. There are three important fields to the right of the Git status and code warning information that are relevant to our project. The first is where we can toggle between debug and release/optimised builds, the second shows the compiler that <code>cmake</code> will use and the third shows the current launch target.</p>
+<figure>
+  <div class="row">
+<div class="column">
+  <a class="a-img" href=/images/2021-05-09/vscode_bottom_bar.png target="_blank">
+    <img src=/images/2021-05-09/generated/2fdff73c-900.jpeg }}  alt="Example of a half-loaded image." >
+  </a>
+</div>
+  </div>
+  <figcaption>The bottom bar in VSCode, when fully configured.</figcaption>
+</figure>
+<p>If the launch target selection is not yet visible, then VSCode should prompt you to select one when we attempt to start the debugger shortly. There are many possible launch targets to choose from in the examples repository, and a new target can always be selected by clicking on the entry in the toolbar, so for the sake of testing our setup the choice is not particularly important.  In the screenshot above I currently have &quot;blink&quot; selected as the traditional demo for testing a new board; the &quot;hello_uart&quot; example would also be a good option for testing <code>picoprobe</code>'s USB serial passthrough.</p>
+<p>For the final test of our setup, we can now switch to the &quot;Run and Debug&quot; view by selecting the 4th entry on the left-hand bar and then hit the green arrow next to &quot;Pico Debug&quot; at the top left.  If all goes well, a view similar to the screenshot below should appear:</p>
+<figure>
+  <div class="row">
+<div class="column">
+  <a class="a-img" href=/images/2021-05-09/vscode_debugging.png target="_blank">
+    <img src=/images/2021-05-09/generated/1a24ab2b-800.jpeg }}  alt="Example of a half-loaded image." >
+  </a>
+</div>
+  </div>
+  <figcaption>VSCode caught in the act of debugging the Raspberry Pi Pico.</figcaption>
+</figure>
+<p>Here we can see that the bottom bar has turned orange, indicating that debugging is active, and a set of debug navigation controls have appeared at the top of the window.  On the left are the standard lists of breakpoints, variables and the call stack for debugging, as well as the ability to view the state of all of the Pico's peripheral registers - a crucial feature for an embedded development IDE. Stepping through the code works as expected, as do breakpoints and the register value viewer.</p>
+<h3>Conclusion</h3>
+<p>I found the process of setting up a development environment for the Raspberry Pi Pico to be quite straightforward and painless.  The documentation is good, and having official support for embedded development in a modern IDE is a rare treat in my experience so I am very much looking forward to working with the Raspberry Pi Pico in future projects!</p>
+
+    </div>
+  </body>
+</html>
