@@ -75,7 +75,7 @@ Before diving into the software, we need to be able to connect the Pico to a scr
 
 As explained within the course materials [here](https://hackaday.io/project/180374-pi-pico-pal-tv-pong/log/194437-composite-signal-connecting-to-a-real-tv), this can be achieved most simply by using two pins and a simple voltage divider like so: 
 
-{% figure "Schematic for digital compositve video adapter." %}
+{% figure "Schematic for digital composite video adapter." %}
 {% image  "cvideo_schematic.png" "Schematic for digital compositve video adapter." %}
 {% endfigure %}
 
