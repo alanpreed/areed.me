@@ -219,6 +219,14 @@
     
        
         <url>
+            <loc>https://areed.me/tags/cad/</loc>
+            <lastmod>13/02/2021</lastmod>
+            <changefreq>monthly</changefreq>
+        </url>
+        
+    
+       
+        <url>
             <loc>https://areed.me/posts/2021_02_15_openwindow_open_source_car_electric_window_controller_part_1/</loc>
             <lastmod>15/02/2021</lastmod>
             <changefreq>monthly</changefreq>
@@ -269,6 +277,14 @@
         <url>
             <loc>https://areed.me/posts/2021-07-14_implementing_composite_video_output_using_the_pi_picos_pio/</loc>
             <lastmod>14/07/2021</lastmod>
+            <changefreq>monthly</changefreq>
+        </url>
+        
+    
+       
+        <url>
+            <loc>https://areed.me/posts/2021-10-11_designing_an_enclosure_for_the_raspberry_pi_picoprobe/</loc>
+            <lastmod>11/10/2021</lastmod>
             <changefreq>monthly</changefreq>
         </url>
         
