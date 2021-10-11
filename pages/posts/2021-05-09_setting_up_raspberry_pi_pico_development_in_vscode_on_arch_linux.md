@@ -25,7 +25,7 @@ Below is the diagram from [Appendix A of the official guide](https://datasheets.
 {% image  "picoprobe_diagram.png" "Example of a half-loaded image." %}
 {% endfigure %}
 
-A prebuilt UF2 file for `picoprobe` is available for download from the official site [here](https://www.raspberrypi.org/documentation/rp2040/getting-started/static/fec949af3d02572823529a1b8c1140a7/picoprobe.uf2), and can be flashed onto a Pico via USB as described previously. Once the board has been programmed, the green LED should light up when it is connected to the PC. 
+A prebuilt UF2 file for `picoprobe` is available for download from the official site [here](https://datasheets.raspberrypi.org/soft/picoprobe.uf2), and can be flashed onto a Pico via USB as described previously. Once the board has been programmed, the green LED should light up when it is connected to the PC. 
 
 
 ### Installing prerequisites 
