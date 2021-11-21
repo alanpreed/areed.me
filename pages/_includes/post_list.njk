@@ -1,28 +1,40 @@
 {# Generates a formatted list of entries for each post in list_of_posts #}
+<ul class="postlist">
+  {% for post in list_of_posts %}
+    <li class="postlist-item">
 
-{% for post in list_of_posts %}
-  <div class="postlist-item">
-    <div class="postlist-item-title">
-      <h2>
-        <a href="{{ post.url | url}}">{{ post.data.title }}</a>
-      </h2>
-    </div>
-    <div class="post-subtitle">
-      <h4 class="post-author"> {{ post.data.author }} </h4>
-      <h5 class="post-date">
-          {{post.date | readableDate}}
-      </h5>
-    </div>
-    <div>
-      {{ post.data.description }}
-    </div>
+      <div class="postlist-item-image">
+        <a class="a-img" href="{{ post.url | url}}">
+        <img src={{ post.date | formatImagePath("thumb.jpg") }}  alt={{ post.data.title }}   >
+        </a>
+      </div>
 
-    <div class="post-taglist">
-     
-    {% for tag in post.data.tags | removePostsTag %}
-      {% set tagUrl %}/tags/{{ tag }}/{% endset %}
-      <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
-    {% endfor %}
-    </div>
-  </div>
-{% endfor %}
+      <div class="postlist-item-header">
+        <h2 class="postlist-item-title">
+          <a href="{{ post.url | url}}">{{ post.data.title }}</a>
+        </h2>
+
+        <div class="postlist-item-subtitle">
+          <h4 class="postlist-item-author">
+            {{ post.data.author }} 
+          </h4>
+          <h5 class="postlist-item-date">
+            {{post.date | readableDate}}
+          </h5>
+        </div>
+      </div>
+
+      <div class="postlist-item-description">
+        {{ post.data.description }}
+      </div>
+
+      <div class="postlist-item-taglist">
+        {% for tag in post.data.tags | removePostsTag %}
+          {% set tagUrl %}/tags/{{ tag }}/{% endset %}
+          <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
+        {% endfor %}
+      </div> 
+    </li>
+  {% endfor %}
+
+</ul>
